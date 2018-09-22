@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if (( EUID == 0 )); then
+   echo "You must not be root to do this." 1>&2
+   exit 100
+fi
+
 for server in $(cat ~/bin/hosts.txt); do 
     IP=`echo "$server" | awk 'BEGIN {RS = "|"}; END {print $1}'`;
     HOST=`echo "$server" | awk 'BEGIN {FS = "|"}; END {print $1}'`;

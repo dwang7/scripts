@@ -31,13 +31,15 @@ function createsshuser()
 
   echo "add ssh public key"
   # add the ssh public key
+  mkdir -p /home/${NEWUSER} 
+  chown ${NEWUSER}:${NEWUSER} /home/${NEWUSER}
   cd /home/${NEWUSER}
-  mkdir .ssh 
-  echo $SSH_PUBLIC_KEY >> .ssh/authorized_keys
-  chown ${NEWUSER}:${NEWUSER} .ssh
-  chown ${NEWUSER}:${NEWUSER} .ssh/authorized_keys
-  chmod go-rwx .ssh
-  chmod go-rwx .ssh/authorized_keys
+  mkdir -p /home/${NEWUSER}/.ssh 
+  chown ${NEWUSER}:${NEWUSER} /home/${NEWUSER}/.ssh 
+  echo $SSH_PUBLIC_KEY >> /home/${NEWUSER}/.ssh/authorized_keys
+  chown ${NEWUSER}:${NEWUSER} /home/${NEWUSER}/.ssh/authorized_keys
+  chmod go-rwx /home/${NEWUSER}/.ssh
+  chmod go-rwx /home/${NEWUSER}/.ssh/authorized_keys
 
 }
 
